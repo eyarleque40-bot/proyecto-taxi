@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🚕 TaxiCompara</h1>
+      <h1>🚕 Precio Justo</h1>
       <p className="subtitulo">Encuentra el mejor precio de taxi en un solo lugar</p>
 
       <div className="formulario">
