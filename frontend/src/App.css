@@ -65,11 +65,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
+
+
 .resultados {
-  margin-top: 25px;
-  display: grid;
-  gap: 15px;
+    gap: 15px;
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
+
 
 .tarjeta {
   background: white;
