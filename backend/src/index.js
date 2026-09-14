@@ -32,6 +32,20 @@ app.get('/', (req, res) => {
   res.send('API TaxiCompara funcionando 🚕');
 });
 
+app.get('/api/test-db', async (req, res) => {
+  try {
+    const pool = require('./db');
+    const [rows] = await pool.query('SELECT 1 + 1 AS resultado');
+    res.json({ ok: true, mensaje: 'Conexión exitosa', resultado: rows[0].resultado });
+  } catch (error) {
+    res.status(500).json({ 
+      ok: false, 
+      error: error.message,
+      codigo: error.code,
+      detalle: error.sqlMessage || 'Sin detalle adicional'
+    });
+  }
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
