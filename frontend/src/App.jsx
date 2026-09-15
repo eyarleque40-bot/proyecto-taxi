@@ -67,7 +67,7 @@ function App() {
     window.open(url, '_blank');
   }}
 >
-  Reservar por WhatsApp
+  Reservar
 </button>
          
           </div>
