@@ -61,11 +61,7 @@ function App() {
             <p>📞 {r.telefono}</p>
 <button 
   className="btn-reservar"
-  onClick={() => {
-    const mensaje = `Hola ${r.nombre}, quiero reservar un taxi de ${origen} a ${destino}. El precio estimado es S/ ${r.precio_total}. ¿Está disponible?`;
-    const url = `https://wa.me/51${r.telefono}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, '_blank');
-  }}
+  onClick={() => alert(`🚕 ¡Tu taxi de ${r.nombre} está en camino!\n\n📞 Teléfono: ${r.telefono}\n💰 Precio: S/ ${r.precio_total}\n\nEl conductor llegará en unos minutos.`)}
 >
   Reservar
 </button>
