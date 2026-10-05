@@ -113,3 +113,23 @@ button:disabled {
 .btn-reservar:hover {
   background: #000;
 }
+
+.info-ruta {
+  text-align: center;
+  color: #555;
+  margin: 20px 0 10px 0;
+  font-size: 14px;
+}
+
+.info-ruta strong {
+  color: #ffb400;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
