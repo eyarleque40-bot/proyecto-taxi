@@ -86,25 +86,57 @@ function App() {
 
   // 🔄 Calcular distancia y tiempo automáticamente al cambiar origen/destino
   useEffect(() => {
-    const coordsOrigen = coordenadasZonas[origen];
-    const coordsDestino = coordenadasZonas[destino];
+  //   const coordsOrigen = coordenadasZonas[origen];
+  //   const coordsDestino = coordenadasZonas[destino];
 
-    if (coordsOrigen && coordsDestino) {
-      // Distancia en línea recta × 1.4 (factor de corrección por calles reales)
-      const dist = calcularDistancia(
-        coordsOrigen.lat, coordsOrigen.lng,
-        coordsDestino.lat, coordsDestino.lng
-      ) * 1.4;
+  //   if (coordsOrigen && coordsDestino) {
+  //     // Distancia en línea recta × 1.4 (factor de corrección por calles reales)
+  //     const dist = calcularDistancia(
+  //       coordsOrigen.lat, coordsOrigen.lng,
+  //       coordsDestino.lat, coordsDestino.lng
+  //     ) * 1.4;
       
-      const distanciaRedondeada = Math.max(1, Math.round(dist));
-      // Tiempo estimado: 30 km/h promedio en Lima con tráfico
-      const tiempoEstimado = Math.round((distanciaRedondeada / 30) * 60);
+  //     const distanciaRedondeada = Math.max(1, Math.round(dist));
+  //     // Tiempo estimado: 30 km/h promedio en Lima con tráfico
+  //     const tiempoEstimado = Math.round((distanciaRedondeada / 30) * 60);
 
-      setDistancia(distanciaRedondeada);
-      setTiempo(tiempoEstimado);
-      setResultados([]); // Limpiar resultados anteriores
-    }
-  }, [origen, destino]);
+  //     setDistancia(distanciaRedondeada);
+  //     setTiempo(tiempoEstimado);
+  //     setResultados([]); // Limpiar resultados anteriores
+  //   }
+  // }, [origen, destino]);
+  // Normalizar nombres (quitar espacios extra, comparar sin distinguir mayúsculas)
+  const normalizar = (str) => str.toLowerCase().trim();
+  
+  const claveOrigen = Object.keys(coordenadasZonas).find(
+    k => normalizar(k) === normalizar(origen)
+  );
+  const claveDestino = Object.keys(coordenadasZonas).find(
+    k => normalizar(k) === normalizar(destino)
+  );
+
+  const coordsOrigen = coordenadasZonas[claveOrigen];
+  const coordsDestino = coordenadasZonas[claveDestino];
+
+  console.log('Origen:', origen, '-> Coordenadas:', coordsOrigen);
+  console.log('Destino:', destino, '-> Coordenadas:', coordsDestino);
+
+  if (coordsOrigen && coordsDestino) {
+    const dist = calcularDistancia(
+      coordsOrigen.lat, coordsOrigen.lng,
+      coordsDestino.lat, coordsDestino.lng
+    ) * 1.4;
+
+    const distanciaRedondeada = Math.max(1, Math.round(dist));
+    const tiempoEstimado = Math.round((distanciaRedondeada / 30) * 60);
+
+    setDistancia(distanciaRedondeada);
+    setTiempo(tiempoEstimado);
+    setResultados([]);
+  } else {
+    console.warn('No se encontraron coordenadas para:', origen, 'o', destino);
+  }
+}, [origen, destino]);
 
   const comparar = async () => {
     setCargando(true);
